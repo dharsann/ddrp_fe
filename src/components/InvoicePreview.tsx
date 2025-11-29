@@ -14,7 +14,7 @@ export default function InvoicePreview({ invoiceId, token, onClose }: InvoicePre
   useEffect(() => {
     const fetchPDF = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/invoices/${invoiceId}/pdf`, {
+        const response = await axios.get(`https://ddrp-be.onrender.com/invoices/${invoiceId}/pdf`, {
           headers: { Authorization: `Bearer ${token}` },
           responseType: 'blob'
         });
