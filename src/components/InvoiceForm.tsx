@@ -46,7 +46,7 @@ export default function InvoiceForm({ token, onSuccess, onClose, order_id }: Inv
   const handleLineItemChange = (
     index: number,
     field: keyof LineItem,
-    value: any
+    value: string | number
   ) => {
     const newLineItems = [...lineItems];
     newLineItems[index] = {
@@ -122,8 +122,12 @@ export default function InvoiceForm({ token, onSuccess, onClose, order_id }: Inv
       toast.success("Invoice created successfully!");
       onSuccess();
       onClose();
-    } catch (err: any) {
-      toast.error(err.response?.data?.detail || "Failed to create invoice");
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.detail || "Failed to create invoice");
+      } else {
+        toast.error("Failed to create invoice");
+      }
     } finally {
       setIsLoading(false);
     }
