@@ -17,7 +17,7 @@ export default function OrderPage() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [orderId, setOrderId] = useState<string | null>(null);
+  // Removed unused orderId variable
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function OrderPage() {
         { product: product.trim(), quantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setOrderId(res.data.id);
+      // Use the order ID directly in the message without storing it
       setModalMessage(`Order placed successfully! Order ID: ${res.data.id}`);
       setIsSuccessModalOpen(true);
       setProduct("");
