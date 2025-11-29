@@ -65,7 +65,7 @@ export default function AdminPage() {
   const fetchOrders = async () => {
     setIsLoading(true);
     try {
-      const res = await axios.get<Order[]>("http://localhost:8000/orders", {
+      const res = await axios.get<Order[]>("https://ddrp-be.onrender.com/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -79,7 +79,7 @@ export default function AdminPage() {
   const fetchRawMaterials = async () => {
     setIsInventoryLoading(true);
     try {
-      const res = await axios.get<RawMaterial[]>("http://localhost:8000/raw-materials", {
+      const res = await axios.get<RawMaterial[]>("https://ddrp-be.onrender.com/raw-materials", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRawMaterials(res.data);
@@ -93,7 +93,7 @@ export default function AdminPage() {
   const fetchInvoices = async () => {
     setIsBillingLoading(true);
     try {
-      const res = await axios.get("http://localhost:8000/invoices", {
+      const res = await axios.get("https://ddrp-be.onrender.com/invoices", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setInvoices(res.data);
@@ -107,7 +107,7 @@ export default function AdminPage() {
   const handleAddInventory = async () => {
     if (!selectedOrder) return;
     try {
-      await axios.post("http://localhost:8000/raw-materials", {
+      await axios.post("https://ddrp-be.onrender.com/raw-materials", {
         order_id: selectedOrder.id,
         ...inventoryForm
       }, {
@@ -132,7 +132,7 @@ export default function AdminPage() {
 
   const handleViewPDF = async (invoiceId: string) => {
     try {
-      const response = await axios.get(`http://localhost:8000/invoices/${invoiceId}/pdf`, {
+      const response = await axios.get(`https://ddrp-be.onrender.com/invoices/${invoiceId}/pdf`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });
@@ -152,7 +152,7 @@ export default function AdminPage() {
   const updateInvoiceStatus = async (id: string, status: string) => {
     try {
       await axios.put(
-        `http://localhost:8000/invoices/${id}/status`,
+        `https://ddrp-be.onrender.com/invoices/${id}/status`,
         { status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -165,7 +165,7 @@ export default function AdminPage() {
 
   const handleConsumeMaterial = async (materialId: string) => {
     try {
-      await axios.put(`http://localhost:8000/raw-materials/${materialId}/consume`, {}, {
+      await axios.put(`https://ddrp-be.onrender.com/raw-materials/${materialId}/consume`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Raw material marked as consumed!");
@@ -183,7 +183,7 @@ export default function AdminPage() {
   const confirmDeleteMaterial = async () => {
     if (!materialToDelete) return;
     try {
-      await axios.delete(`http://localhost:8000/raw-materials/${materialToDelete}`, {
+      await axios.delete(`https://ddrp-be.onrender.com/raw-materials/${materialToDelete}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Raw material deleted successfully!");
@@ -198,7 +198,7 @@ export default function AdminPage() {
 
   const checkNaturalAlerts = async () => {
     try {
-      await axios.post("http://localhost:8000/raw-materials/check-natural-alerts", {}, {
+      await axios.post("https://ddrp-be.onrender.com/raw-materials/check-natural-alerts", {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Natural rubber alerts checked!");
@@ -224,7 +224,7 @@ export default function AdminPage() {
     
     try {
       await axios.put(
-        `http://localhost:8000/orders/${pendingStatusUpdate.orderId}/status`,
+        `https://ddrp-be.onrender.com/orders/${pendingStatusUpdate.orderId}/status`,
         { status: pendingStatusUpdate.status },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -252,7 +252,7 @@ export default function AdminPage() {
   const confirmDeleteInvoice = async () => {
     if (!invoiceToDelete) return;
     try {
-      await axios.delete(`http://localhost:8000/invoices/${invoiceToDelete}`, {
+      await axios.delete(`https://ddrp-be.onrender.com/invoices/${invoiceToDelete}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchInvoices();
@@ -273,7 +273,7 @@ export default function AdminPage() {
   const confirmDelete = async () => {
     if (!orderToDelete) return;
     try {
-      await axios.delete(`http://localhost:8000/orders/${orderToDelete}`, {
+      await axios.delete(`https://ddrp-be.onrender.com/orders/${orderToDelete}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchOrders();
@@ -289,7 +289,7 @@ export default function AdminPage() {
   const checkForDelays = async () => {
     setIsDelayCheckLoading(true);
     try {
-      await axios.post("http://localhost:8000/orders/check-delays", {}, {
+      await axios.post("https://ddrp-be.onrender.com/orders/check-delays", {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Delay check completed!");
@@ -308,7 +308,7 @@ export default function AdminPage() {
   const saveExpectedDate = async () => {
     if (!editingOrder || !newExpectedDate) return;
     try {
-      await axios.put(`http://localhost:8000/orders/${editingOrder.id}/expected-delivery`, {
+      await axios.put(`https://ddrp-be.onrender.com/orders/${editingOrder.id}/expected-delivery`, {
         expected_delivery_date: new Date(newExpectedDate).toISOString()
       }, {
         headers: { Authorization: `Bearer ${token}` },
