@@ -14,7 +14,7 @@ export default function Register() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/register", {
+      await axios.post("https://ddrp-be.onrender.com/register", {
         name,
         email,
         phone,
