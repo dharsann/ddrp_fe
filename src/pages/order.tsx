@@ -32,7 +32,7 @@ export default function OrderPage() {
       return;
     }
     try {
-      const res = await axios.get<Order[]>(`http://localhost:8000/orders/${userId}`, {
+      const res = await axios.get<Order[]>(`https://ddrp-be.onrender.com/orders/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -69,7 +69,7 @@ export default function OrderPage() {
     setIsLoading(true);
     try {
       const res = await axios.post<Order>(
-        "http://localhost:8000/orders",
+        "https://ddrp-be.onrender.com/orders",
         { product: product.trim(), quantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
