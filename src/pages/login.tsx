@@ -17,7 +17,7 @@ export default function Login() {
       formData.append("username", email);
       formData.append("password", password);
 
-      const res = await axios.post("http://localhost:8000/token", formData);
+      const res = await axios.post("https://ddrp-be.onrender.com/token", formData);
       const token: string = res.data.access_token;
 
       const payload = JSON.parse(atob(token.split(".")[1]));
