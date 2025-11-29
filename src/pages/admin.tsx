@@ -912,7 +912,9 @@ export default function AdminPage() {
             <div className="bg-white rounded-lg p-6 max-w-md w-full">
               <h3 className="text-lg text-black font-semibold mb-4">Confirm Status Update</h3>
               <p className="mb-4 text-black">
-                Are you sure you want to update the status of <strong>"{pendingStatusUpdate.orderProduct}"</strong> to <strong>"{pendingStatusUpdate.status}"</strong>?
+                  Are you sure you want to update the status of{" "}
+                  <strong>&quot;{pendingStatusUpdate.orderProduct}&quot;</strong> to{" "}
+                  <strong>&quot;{pendingStatusUpdate.status}&quot;</strong>?
               </p>
               <div className="flex justify-end gap-2">
                 <button
